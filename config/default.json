@@ -1,0 +1,9 @@
+{
+  "db": {
+    "username": "username",
+    "password": "password",
+    "name": "dbname",
+    "host": "host"
+  },
+  "jwt-secret": "Do not tell ant body."
+}

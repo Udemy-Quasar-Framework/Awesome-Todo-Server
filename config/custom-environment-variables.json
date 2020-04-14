@@ -1,0 +1,8 @@
+{
+  "db": {
+    "username": "jwt_api_demo_username",
+    "password": "jwt_api_demo_password",
+    "host": "jwt_api_demo_host"
+  },
+  "jwt-secret": "jwt_api_demo_jwt_secret"
+}
