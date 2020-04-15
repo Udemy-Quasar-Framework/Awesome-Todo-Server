@@ -19,8 +19,8 @@ module.exports = () => {
         .then(() => {
             dbDebug('MongoDB connection completed.');
         })
-        .catch(() => {
-            dbDebug('MongoDB connection error.');
+        .catch((err) => {
+            dbDebug('MongoDB connection error. Error:', err.message);
         });
 
     // noinspection JSUnresolvedFunction
