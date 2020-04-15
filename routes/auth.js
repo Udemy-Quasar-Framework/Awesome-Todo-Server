@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {validationResult} = require('express-validator');
+const bcrypt = require('bcrypt');
 
 const Res = require('../models/Res');
 const {Err, getErrorArr} = require('../models/Err');
@@ -38,7 +39,8 @@ router.post('/register', userValidation, async (req, res) => {
 
     /* create the new user */
     errors = null;
-    await User.create({name, email, password}).catch(ex => {
+    const passwordHash = await bcrypt.hash(password, 10); // more than 10 breaks the method
+    await User.create({name, email, pass: passwordHash}).catch(ex => {
         debug('Error saving your changes.');
         errors = getErrorArr(ex.errors);
     });
