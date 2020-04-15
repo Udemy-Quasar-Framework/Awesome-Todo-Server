@@ -1,7 +1,7 @@
 // mongoose.js configuration
 const config = require('config');
 const mongoose = require('mongoose');
-const {dbDebug} = require('./debugger');
+const {dbDebug} = require('../startup/debuggers');
 
 module.exports = () => {
     // find the environment var info on RoboForm
@@ -13,7 +13,7 @@ module.exports = () => {
     // https://mongoosejs.com/docs/deprecations.html
     const conStr = `mongodb://${username}:${password}@${host}/${dbname}`;
     dbDebug('Connection String:', conStr);
-    mongoose.connect(conStr, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, autoReconnect: true})
+    mongoose.connect(conStr, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
         .then(() => {
             dbDebug('MongoDB connection completed.');
         });
