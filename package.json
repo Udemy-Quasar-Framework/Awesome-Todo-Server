@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www --inspect"
+    "dev": "set DEBUG=app:* & nodemon --inspect ./bin/www"
   },
   "dependencies": {
     "config": "^3.3.1",
