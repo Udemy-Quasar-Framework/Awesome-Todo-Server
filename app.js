@@ -1,12 +1,13 @@
-const express = require('express');
 const path = require('path');
-const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const express = require('express');
+const createError = require('http-errors');
+const cookieParser = require('cookie-parser');
 
 require('express-async-errors');
 
 const Res = require('./models/Res');
-const Err = require('./models/Err');
+const {Err} = require('./models/Err');
 const {debug} = require('./startup/debuggers');
 
 const app = express();
@@ -22,12 +23,12 @@ require('./startup/routes')(app);
 
 // handler 404 requests
 app.use(function(req, res, next) {
-    res.send(new Res(false, '404 - Resource not found.', [
-        new Err('Resource not found', 'unknown', 'unknown', 'unknown')
-    ]));
+    debug('404 middleware');
+    next(createError(404));
 });
 
 // handler unexpected errors
+// noinspection JSUnusedLocalSymbols
 app.use(function(err, req, res, next) {
     debug('Unhandled error. Error Detail: ', err);
 
