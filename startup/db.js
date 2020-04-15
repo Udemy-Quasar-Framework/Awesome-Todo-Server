@@ -23,12 +23,10 @@ module.exports = () => {
             dbDebug('MongoDB connection error. Error:', err.message);
         });
 
-    // noinspection JSUnresolvedFunction
     mongoose.connection.on('error', () => {
         dbDebug('Error connecting to the database.');
     });
 
-    // noinspection JSUnresolvedFunction
     mongoose.connection.once('open', () => {
         dbDebug('Connection open.');
     });
