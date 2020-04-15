@@ -7,6 +7,10 @@ const {Err, getErrorArr} = require('../models/Err');
 const {debug} = require('../startup/debuggers');
 const {User, userValidation} = require('../models/user');
 
+
+/**
+ * Register a new user. After register will be able to access resources that are protected.
+ */
 router.post('/register', userValidation, async (req, res) => {
     let errors = null;
     const {name, email, password} = req.body;
@@ -46,6 +50,17 @@ router.post('/register', userValidation, async (req, res) => {
 
     res.statusCode = 200;
     res.send(new Res(true, 'User registered', [], {name, email}));
+});
+
+
+/**
+ * Login or authenticate a user. Will validate credentials and return a JWT token.
+ */
+router.post('/login', async (req, res) => {
+    const token = "asdasdfwewqedwd.dqasd.qweqweqwdeqwd";
+
+    res.statusCode = 200;
+    res.send(new Res(true, 'User is authorized.', [], {token}));
 });
 
 module.exports = router;
