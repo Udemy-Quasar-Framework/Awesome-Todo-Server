@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+require('./startup/db')();
 require('./startup/routes')(app);
 
 module.exports = app;
