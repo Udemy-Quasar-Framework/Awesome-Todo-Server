@@ -12,7 +12,8 @@ const userSchema = new Schema({
         unique: true,
         match: /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/
     },
-    password: {type: String, require: true}
+    password: {type: String, require: true},
+    lastAuthToken: {type: String}
 });
 
 const _userValidation = () => [
@@ -36,7 +37,7 @@ const _userAuthValidation = () => [
  * @property {string} password - User password.
  * @constructor
  */
-module.exports.UserC = function(name, email, password) {
+module.exports.UserC = function (name, email, password) {
     this.name = name;
     this.email = email;
     this.password = password;

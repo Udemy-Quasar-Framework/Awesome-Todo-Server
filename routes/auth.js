@@ -2,12 +2,12 @@ const express = require('express');
 const router = express.Router();
 const {validationResult} = require('express-validator');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const config = require('config');
+const moment = require('moment');
 
+const {debug} = require('../startup/debuggers');
+const {genToken} = require('../models/auth');
 const Res = require('../models/Res');
 const {Err, getErrorArr} = require('../models/Err');
-const {debug} = require('../startup/debuggers');
 const {User, UserC, userValidation, userAuthValidation} = require('../models/user');
 
 
@@ -63,7 +63,7 @@ router.post('/register', userValidation, async (req, res) => {
 router.post('/login', userAuthValidation, async (req, res) => {
     let errors = null;
     const {email, password} = req.body;
-    const errorMsg = 'Email or password not valid.';
+    let errorMsg = 'Email or password not valid.';
     const credentialError = new Err(errorMsg, 'email, password', email, 'body');
 
     /* validate body data */
@@ -89,16 +89,35 @@ router.post('/login', userAuthValidation, async (req, res) => {
     if (!validPassword) {
         debug(`The password ${password} is not valid.`);
         res.statusCode = 400;
-        res.send(new Res(false, errorMsg, errors));
+        res.send(new Res(false, errorMsg, [credentialError]));
         return;
     }
 
     // Everything fine, authenticate the user
     const payload = {userId: user._id};
+    const token = genToken(payload, '3m');
     const data = {
-        token: jwt.sign(payload, config.get('jwt-secret'), {expiresIn: '1h'})
+        token,
+        exp: moment().add(3, 'minutes')
     };
 
+    /* update the token with the new refresh token */
+    errors = null;
+    user.lastAuthToken = token;
+    await user.save().catch(ex => {
+        debug(`Error when try to save the refresh token with value ${token}.`);
+        errorMsg = 'Error when trying to refresh the token.';
+        errors = [
+            new Err(ex.message, 'unknown', 'unknown', 'unknown')
+        ];
+    });
+    if (errors) {
+        res.statusCode = 500;
+        res.send(new Res(false, errorMsg, errors));
+        return;
+    }
+
+    res.setHeader('X-Auth-Token', token);
     res.statusCode = 200;
     res.send(new Res(true, 'User is authorized.', [], data));
 });
