@@ -48,6 +48,7 @@ module.exports.auth = async (req, res, next) => {
 
         /* refresh the token */
         try {
+            // TODO Move the genToken to User model
             const newToken = genToken(p);
             await User.updateOne({_id:userId}, {lastAuthToken: newToken});
         } catch (ex) {
