@@ -3,12 +3,12 @@ const config = require('config');
 const mongoose = require('mongoose');
 const {dbDebug} = require('./debuggers');
 
-module.exports = (uris, callback) => {
+module.exports = () => {
     // find the environment var info on RoboForm
-    const username = config.get('db.username');
-    const password = config.get('db.password');
-    const dbname = config.get('db.name');
-    const host = config.get('db.host');
+    // const username = config.get('db.username');
+    // const password = config.get('db.password');
+    // const dbname = config.get('db.name');
+    // const host = config.get('db.host');
     const connStr = config.get('db.connStr') || '';
 
     // https://mongoosejs.com/docs/deprecations.html
