@@ -3,20 +3,25 @@ const config = require('config');
 const mongoose = require('mongoose');
 const {dbDebug} = require('./debuggers');
 
-module.exports = () => {
+module.exports = (uris, callback) => {
     // find the environment var info on RoboForm
     const username = config.get('db.username');
     const password = config.get('db.password');
     const dbname = config.get('db.name');
     const host = config.get('db.host');
-    const connStr = config.get('db.connStr');
-    // const connStr = 'mongodb+srv://marlonfsolis:MDBA-Hermana83@cluster0.en9sw.mongodb.net/jwtapidemo?retryWrites=true&w=majority';
+    const connStr = config.get('db.connStr') || '';
 
     // https://mongoosejs.com/docs/deprecations.html
     // const connStr = `mongodb://${username}:${password}@${host}/${dbname}`;
     dbDebug('Connection String:', connStr);
 
-    mongoose.connect(connStr, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
+    const connOptions = {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true
+    }
+
+    mongoose.connect(connStr, connOptions)
         .then(() => {
             dbDebug('MongoDB connection completed.');
         })
