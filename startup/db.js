@@ -9,13 +9,14 @@ module.exports = () => {
     const password = config.get('db.password');
     const dbname = config.get('db.name');
     const host = config.get('db.host');
+    const connStr = config.get('db.connStr');
+    // const connStr = 'mongodb+srv://marlonfsolis:MDBA-Hermana83@cluster0.en9sw.mongodb.net/jwtapidemo?retryWrites=true&w=majority';
 
     // https://mongoosejs.com/docs/deprecations.html
-    const conStr = `mongodb://${username}:${password}@${host}/${dbname}`;
-    dbDebug('Connection String:', conStr);
+    // const connStr = `mongodb://${username}:${password}@${host}/${dbname}`;
+    dbDebug('Connection String:', connStr);
 
-
-    mongoose.connect(conStr, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
+    mongoose.connect(connStr, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
         .then(() => {
             dbDebug('MongoDB connection completed.');
         })

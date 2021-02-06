@@ -3,7 +3,8 @@
     "username": "username",
     "password": "password",
     "name": "dbname",
-    "host": "host"
+    "host": "host",
+    "connStr": "my connection string"
   },
   "jwt-secret": "Do not tell ant body."
 }

@@ -46,6 +46,6 @@ module.exports.UserC = function (name, email, password) {
 /**
  * @type {Model<UserC>}
  */
-module.exports.User = model('user', userSchema);
+module.exports.User = model('user', userSchema, 'user');
 module.exports.userValidation = _userValidation();
 module.exports.userAuthValidation = _userAuthValidation();
