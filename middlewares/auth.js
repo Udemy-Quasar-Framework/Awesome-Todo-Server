@@ -14,7 +14,8 @@ const { User } = require('../models/user')
  * @param next
  */
 module.exports.auth = async (req, res, next) => {
-  const token = req.header('X-Auth-Token') || null
+  let token = req.header('X-Auth-Token') || null
+  res.setHeader('X-Auth-Token', token)
 
   /* no token validation */
   if (!token) {
@@ -54,8 +55,8 @@ module.exports.auth = async (req, res, next) => {
     /* refresh the token */
     try {
       // TODO Move the genToken to User model
-      const newToken = genToken(p)
-      await User.updateOne({ _id: userId }, { lastAuthToken: newToken })
+      token = genToken(payload.toPlain())
+      await User.updateOne({ _id: userId }, { lastAuthToken: token })
     } catch (ex) {
       const errorMsg = 'Error when trying to refresh the token.'
       res.statusCode = 500
@@ -67,6 +68,7 @@ module.exports.auth = async (req, res, next) => {
       return
     }
 
+    /* all good, set the headers and locals */
     res.setHeader('X-Auth-Token', token)
     res.locals.payload = payload
     next()

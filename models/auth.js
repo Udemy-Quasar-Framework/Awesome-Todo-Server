@@ -1,6 +1,6 @@
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken')
 const config = require('config')
-const {User} = require('./user');
+const { User } = require('./user')
 
 /**
  *
@@ -10,27 +10,32 @@ const {User} = require('./user');
  * @function {User} getUser - Get the user document.
  * @constructor
  */
-module.exports.Payload = function(p) {
-    let _user;
-    const self = this;
-    this.userId = p.userId;
-    this.iat = p.iat;
-    this.exp = p.exp;
-    this.getUser = _getUser;
+module.exports.Payload = function (p) {
+  let _user
+  const self = this
+  self.userId = p.userId
+  self.iat = p.iat
+  self.exp = p.exp
+  self.getUser = _getUser
+  self.toPlain = _toPlain
 
-    async function _getUser() {
-        if (!_user)
-            _user = await User.findById(self.userId);
-        return _user;
+  async function _getUser() {
+    if (!_user) _user = await User.findById(self.userId)
+    return _user
+  }
+
+  function _toPlain() {
+    return {
+      userId: self.userId,
     }
+  }
 }
-
 
 /**
  * Generate a token with JsonWebToken module
  * @param {object} payload - The payload to be encrypted
  * @param {string|number} expIn Expiration time.
  */
-module.exports.genToken = function (payload, expIn='3m') {
-    return jwt.sign(payload, config.get('jwt-secret'), {expiresIn: expIn});
-};
+module.exports.genToken = function (payload, expIn = '30m') {
+  return jwt.sign(payload, config.get('jwt-secret'), { expiresIn: expIn })
+}

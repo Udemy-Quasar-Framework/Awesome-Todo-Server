@@ -1,21 +1,13 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 
-const Res = require('../models/Res');
-const {auth} = require('../middlewares/auth');
+const Res = require('../models/Res')
+const { auth } = require('../middlewares/auth')
+const IndexController = require('../controllers/index')
 
 /* GET home page. */
-router.get('/index', function(req, res) {
-  res.send(new Res(true, 'Index endpoint working!', [], {}));
-});
+router.get('/index', IndexController.index)
 
-router.get('/auth-rsc1', auth, async (req, res) => {
-  const data = {
-    payload: res.locals.payload
-  };
+router.get('/auth-rsc1', auth, IndexController.auth_rsc1)
 
-  res.statusCode = 200;
-  res.send(new Res(true, 'Resource is accessed.', [], data));
-});
-
-module.exports = router;
+module.exports = router
