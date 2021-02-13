@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const Res = require('../models/ResModel')
-const { auth } = require('../middlewares/auth')
+const { auth } = require('../middlewares/authMiddleware')
 const IndexController = require('../controllers/indexController')
 
 /* GET home page. */
