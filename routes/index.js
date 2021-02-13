@@ -3,7 +3,7 @@ const router = express.Router()
 
 const Res = require('../models/Res')
 const { auth } = require('../middlewares/auth')
-const IndexController = require('../controllers/index')
+const IndexController = require('../controllers/indexController')
 
 /* GET home page. */
 router.get('/index', IndexController.index)
