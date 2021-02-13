@@ -1,5 +1,6 @@
 {
   "name": "awesome-todo",
+  "productName": "Awesome Todo",
   "version": "0.0.0",
   "private": true,
   "scripts": {
