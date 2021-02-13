@@ -1,5 +1,5 @@
-const indexRouter = require('../routes/index');
-const authRouter = require('../routes/auth');
+const indexRouter = require('../routes/indexRoutes');
+const authRouter = require('../routes/authRoutes');
 
 module.exports = function(app) {
     app.use('/', indexRouter);
