@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const config = require('config')
-const { User } = require('./user')
+const { User } = require('./userModel')
 
 /**
  *

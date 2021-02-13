@@ -1,4 +1,4 @@
-const Res = require('../models/Res')
+const Res = require('../models/ResModel')
 
 module.exports.index = function (req, res) {
   res.send(new Res(true, 'Index endpoint working!', [], {}))

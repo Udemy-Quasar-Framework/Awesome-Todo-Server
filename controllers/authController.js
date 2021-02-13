@@ -3,10 +3,10 @@ const bcrypt = require('bcrypt')
 const moment = require('moment')
 
 const { debug } = require('../startup/debuggers')
-const { genToken } = require('../models/auth')
-const Res = require('../models/Res')
-const { Err, getErrorArr } = require('../models/Err')
-const { User, UserC } = require('../models/user')
+const { genToken } = require('../models/authModel')
+const Res = require('../models/ResModel')
+const { Err, getErrorArr } = require('../models/ErrModel')
+const { User, UserC } = require('../models/userModel')
 
 module.exports.register = async (req, res) => {
   let errors = null

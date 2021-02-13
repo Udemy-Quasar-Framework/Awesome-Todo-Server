@@ -1,11 +1,11 @@
 const jwt = require('jsonwebtoken')
 const config = require('config')
 
-const Res = require('../models/Res')
-const { Err } = require('../models/Err')
+const Res = require('../models/ResModel')
+const { Err } = require('../models/ErrModel')
 const { debug } = require('../startup/debuggers')
-const { Payload, genToken } = require('../models/auth')
-const { User } = require('../models/user')
+const { Payload, genToken } = require('../models/authModel')
+const { User } = require('../models/userModel')
 
 /**
  * Authorization middleware

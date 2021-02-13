@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const { userValidation, userAuthValidation } = require('../models/user')
+const { userValidation, userAuthValidation } = require('../models/userModel')
 const authController = require('../controllers/authController')
 
 /**
