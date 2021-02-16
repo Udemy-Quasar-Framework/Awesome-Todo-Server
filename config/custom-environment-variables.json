@@ -1,9 +1,9 @@
 {
   "db": {
-    "username": "jwt_api_demo_username",
-    "password": "jwt_api_demo_password",
-    "host": "jwt_api_demo_host",
-    "connStr": "jwt_api_demo_conn_string"
+    "username": "awesome_todo_username",
+    "password": "awesome_todo_password",
+    "host": "awesome_todo_host",
+    "connStr": "awesome_todo_conn_string"
   },
-  "jwt-secret": "jwt_api_demo_jwt_secret"
+  "jwt-secret": "awesome_todo_jwt_secret"
 }
