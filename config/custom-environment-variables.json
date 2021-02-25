@@ -5,5 +5,6 @@
     "host": "awesome_todo_host",
     "connStr": "awesome_todo_conn_string"
   },
-  "jwt-secret": "awesome_todo_jwt_secret"
+  "jwt-secret": "awesome_todo_jwt_secret",
+  "allowedOrigins": "awesome_todo_allowedOrigins"
 }

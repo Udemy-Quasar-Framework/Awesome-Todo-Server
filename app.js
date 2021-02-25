@@ -12,6 +12,8 @@ const { debug } = require('./startup/debuggers')
 
 const app = express()
 
+require('./startup/cors')(app)
+
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
@@ -20,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 require('./startup/db')()
 require('./startup/routes')(app)
+
 
 // handler 404 requests
 app.use(function (req, res, next) {

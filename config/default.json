@@ -6,5 +6,6 @@
     "host": "host",
     "connStr": "my connection string"
   },
-  "jwt-secret": "Do not tell ant body."
+  "jwt-secret": "Do not tell ant body.",
+  "allowedOrigins": ["http://localhost:8080", "https://my-todo.com"]
 }
